@@ -32,7 +32,7 @@ app.MapGet("/CheckAgeValidation", (int age) =>
     .WithOpenApi();
 
 // Masaüstünde "ageInfo.txt" adında bir dosya oluşturur ve yaşı içerisinden okuyarak döner.
-app.MapPost("/CheckAgeFromDirectory", async (HttpContext context, int age) =>
+app.MapPost("/CheckAgeFromDirectory", async (int age) =>
 {
     var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "ageInfo.txt");
 
@@ -47,11 +47,11 @@ app.MapPost("/CheckAgeFromDirectory", async (HttpContext context, int age) =>
     {
         if (storedAge >= 18)
         {
-            return Results.Ok("Ehliyet alabilirsiniz.");
+            return Results.Content("Ehliyet alabilirsiniz.");
         }
         else
         {
-            return Results.BadRequest("Ehliyet alamazsınız.");
+            return Results.Content("Ehliyet alamazsınız.");
         }
     }
 
